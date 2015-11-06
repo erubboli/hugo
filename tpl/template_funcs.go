@@ -1167,6 +1167,10 @@ func DateFormat(layout string, v interface{}) (string, error) {
 	return t.Format(layout), nil
 }
 
+//this expect a template.HTML instead of string
+func SafeJS(text template.HTML) template.JS {
+  return template.JS(text)
+}
 func SafeHTML(text string) template.HTML {
 	return template.HTML(text)
 }
@@ -1385,6 +1389,7 @@ func init() {
 		"isset":        IsSet,
 		"echoParam":    ReturnWhenSet,
 		"safeHTML":     SafeHTML,
+		"safeJS":       SafeJS,
 		"safeCSS":      SafeCSS,
 		"safeURL":      SafeURL,
 		"absURL":       func(a string) template.HTML { return template.HTML(helpers.AbsURL(a)) },
